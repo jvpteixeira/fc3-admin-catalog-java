@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fullcycle.admin.catalog.domain.category.CategoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-06-18T15:38:17" hostname="SEN1099" time="0.028">
+  <properties/>
+  <testcase name="givenAValidCategory_whenCallUpdateWithInvalidParams_thenReturnCategoryUpdated()" classname="com.fullcycle.admin.catalog.domain.category.CategoryTest" time="0.028"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
