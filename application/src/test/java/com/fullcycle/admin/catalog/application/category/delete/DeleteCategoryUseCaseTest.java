@@ -38,7 +38,7 @@ public class DeleteCategoryUseCaseTest {
 
         Assertions.assertDoesNotThrow(() -> useCase.execute(expectedId.getValue()));
 
-        verify(categoryGateway, times(1).deleteById(eq(expectedId)));
+        verify(categoryGateway, times(1)).deleteById(eq(expectedId));
 
     }
 
@@ -51,7 +51,7 @@ public class DeleteCategoryUseCaseTest {
 
         Assertions.assertDoesNotThrow(() -> useCase.execute(expectedId.getValue()));
 
-        verify(categoryGateway, times(1).deleteById(eq(expectedId)));
+        verify(categoryGateway, times(1)).deleteById(eq(expectedId));
     }
 
     @Test
@@ -62,8 +62,8 @@ public class DeleteCategoryUseCaseTest {
         doThrow(new IllegalStateException("Gateway error"))
                 .when(categoryGateway).deleteById(eq(expectedId));
 
-        Assertions.assertThrows(IllegalStateException.class, () -> useCase.execute(expectedId.getValue());
+        Assertions.assertThrows(IllegalStateException.class, () -> useCase.execute(expectedId.getValue()));
 
-        verify(categoryGateway, times(1).deleteById(eq(expectedId)));
+        verify(categoryGateway, times(1)).deleteById(eq(expectedId));
     }
 }
