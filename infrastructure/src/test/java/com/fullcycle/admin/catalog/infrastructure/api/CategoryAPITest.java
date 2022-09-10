@@ -69,11 +69,12 @@ public class CategoryAPITest {
                         jsonPath("$.id", equalTo("123"))
                 );
 
-        verify(createCategoryUseCase, times(1)).execute(argThat(cmd ->
-            Objects.equals(expectedName, cmd.name())
-            && Objects.equals(expectedDescription, cmd.description())
-            && Objects.equals(expectedIsActive, cmd.isActive())
-        ));
+        verify(createCategoryUseCase, times(1))
+            .execute(argThat(cmd ->
+                Objects.equals(expectedName, cmd.name())
+                && Objects.equals(expectedDescription, cmd.description())
+                && Objects.equals(expectedIsActive, cmd.isActive())
+            ));
     }
 
     @Test

@@ -31,7 +31,6 @@ public interface CategoryAPI {
     })
     ResponseEntity<?> createCategory(@RequestBody @Valid CreateCategoryApiInput input);
 
-
     @GetMapping(
             value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
