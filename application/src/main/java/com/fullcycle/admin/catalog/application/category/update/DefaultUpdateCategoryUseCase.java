@@ -23,16 +23,13 @@ public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase{
     @Override
     public Either<Notification, UpdateCategoryOutput> execute(final UpdateCategoryCommand aCommand) {
         final var anId = CategoryID.from(aCommand.id());
-        final var aName = aCommand.name();
-        final var aDescription = aCommand.description();
-        final var isActive = aCommand.isActive();
 
         final var aCategory = this.categoryGateway.findById(anId)
             .orElseThrow(notFound(anId));
 
         final var notification = Notification.create();
         aCategory
-            .update(aName, aDescription, isActive)
+            .update(aCommand.name(), aCommand.description(), aCommand.isActive())
             .validate(notification);
 
         return notification.hasError() ? API.Left(notification) : update(aCategory);

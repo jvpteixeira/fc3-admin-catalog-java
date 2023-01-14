@@ -29,7 +29,7 @@ public class CreateCategoryUseCaseTest {
     }
 
     @Test
-    public void givenAValidCommand_WhenCallsCreateCategory_ShouldReturnCategoryId(){
+    public void givenAValidCommand_whenCallsCreateCategory_ShouldReturnCategoryId(){
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
@@ -57,7 +57,7 @@ public class CreateCategoryUseCaseTest {
     }
 
     @Test
-    public void givenAInvalidCommand_whenCallsCreateCategory_thenShouldReturnDomainException() {
+    public void givenAInvalidName_whenCallsCreateCategory_thenShouldReturnDomainException() {
         final String expectedName = null;
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
@@ -77,7 +77,7 @@ public class CreateCategoryUseCaseTest {
     }
 
     @Test
-    public void givenAInvalidCommandWithInactiveCategory_whenCallsCreateCategory_thenShouldReturnInactiveCategoryId() {
+    public void givenAValidCommandWithInactiveCategory_whenCallsCreateCategory_thenShouldReturnInactiveCategoryId() {
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = false;

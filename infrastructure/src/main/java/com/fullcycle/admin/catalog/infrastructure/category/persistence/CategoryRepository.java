@@ -1,6 +1,5 @@
 package com.fullcycle.admin.catalog.infrastructure.category.persistence;
 
-import com.fullcycle.admin.catalog.domain.category.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

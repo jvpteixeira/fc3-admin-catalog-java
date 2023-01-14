@@ -65,9 +65,7 @@ public class UpdateCategoryUseCaseTest {
                 && Objects.equals(expectedDescription, aUpdatedCategory.getDescription())
                 && Objects.equals(expectedIsActive, aUpdatedCategory.isActive())
                 && Objects.equals(expectedId, aUpdatedCategory.getId())
-                && Objects.nonNull(aUpdatedCategory.getId())
                 && Objects.equals(aCategory.getCreatedAt(), aUpdatedCategory.getCreatedAt())
-                && Objects.equals(aCategory.getUpdatedAt(), aUpdatedCategory.getUpdatedAt())
                 && aCategory.getUpdatedAt().isBefore(aUpdatedCategory.getUpdatedAt())
                 && Objects.isNull(aCategory.getDeletedAt())
         ));
@@ -88,7 +86,7 @@ public class UpdateCategoryUseCaseTest {
                 UpdateCategoryCommand.with(expectedId.getValue(), expectedName, expectedDescription, expectedIsActive);
 
         when(categoryGateway.findById(eq(expectedId)))
-                .thenReturn(Optional.of(aCategory.clone()));
+                .thenReturn(Optional.of(Category.with(aCategory)));
 
         final var notification = useCase.execute(aCommand).getLeft();
 

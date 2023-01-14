@@ -68,10 +68,18 @@ public class CategoryMySQLGateway implements CategoryGateway {
                      SpecificationUtils
                              .<CategoryJpaEntity>like("name", str)
                              .or(like("description", str))
+                    /*
+                        {
+                            final Specification<CategoryJpaEntity> nameLike = like("name", str);
+                            final Specification<CategoryJpaEntity> descriptionLike = like("description", str);
+                            return nameLike.or(descriptionLike);
+                        }
+                    */
                 )
                 .orElse(null);
 
         final var pageResult = this.repository.findAll(Specification.where(specifications), page);
+
         return new Pagination<>(
             pageResult.getNumber(),
             pageResult.getSize(),

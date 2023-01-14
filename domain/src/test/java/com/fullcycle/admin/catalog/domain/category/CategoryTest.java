@@ -161,6 +161,7 @@ public class CategoryTest {
         final var actualCategory = aCategory.deactivate();
 
         Assertions.assertDoesNotThrow(() -> actualCategory.validate(new ThrowsValidationHandler()));
+
         Assertions.assertEquals(aCategory.getId(), actualCategory.getId());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
@@ -172,7 +173,7 @@ public class CategoryTest {
     }
 
     @Test
-    public void givenAValidInactiveCategory_whenCallActivate_thenReturnCategoryAtivated(){
+    public void givenAValidInactiveCategory_whenCallActivate_thenReturnCategoryActivated(){
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;

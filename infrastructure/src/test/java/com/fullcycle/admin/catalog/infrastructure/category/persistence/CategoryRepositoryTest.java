@@ -19,8 +19,10 @@ public class CategoryRepositoryTest {
         final var expectedMessage = "not-null property references a null or transient value : com.fullcycle.admin.catalog.infrastructure.category.persistence.CategoryJpaEntity.name";
 
         final var aCategory = Category.newCategory("Filmes", "A categoria mais assistida", true);
+
         final var anEntity = CategoryJpaEntity.from(aCategory);
         anEntity.setName(null);
+
         final var actualException = Assertions.assertThrows(DataIntegrityViolationException.class, () -> categoryRepository.save(anEntity));
 
         final var actualCause = Assertions.assertInstanceOf(PropertyValueException.class, actualException.getCause());

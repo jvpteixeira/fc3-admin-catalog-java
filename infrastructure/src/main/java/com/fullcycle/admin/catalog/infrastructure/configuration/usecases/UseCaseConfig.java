@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CategoryUseCaseConfig {
+public class UseCaseConfig {
 
     private final CategoryGateway categoryGateway;
 
-    public CategoryUseCaseConfig(CategoryGateway categoryGateway) {
+    public UseCaseConfig(CategoryGateway categoryGateway) {
         this.categoryGateway = categoryGateway;
     }
 
