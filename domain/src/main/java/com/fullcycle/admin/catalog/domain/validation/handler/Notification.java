@@ -40,7 +40,7 @@ public class Notification implements ValidationHandler {
     }
 
     @Override
-    public ValidationHandler validate(Validation aValidation) {
+    public <T> T validate(Validation<T> aValidation) {
         try{
             aValidation.validate();
         } catch(final DomainException ex){
@@ -49,7 +49,7 @@ public class Notification implements ValidationHandler {
             this.errors.add(new Error(t.getMessage()));
         }
 
-        return this;
+        return null;
     }
 
     @Override

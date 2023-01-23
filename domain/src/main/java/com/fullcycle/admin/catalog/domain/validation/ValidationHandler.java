@@ -6,7 +6,7 @@ import java.util.List;
 public interface ValidationHandler {
     ValidationHandler append(Error anError);
     ValidationHandler append(ValidationHandler anHandler);
-    ValidationHandler validate(Validation aValidation);
+    <T> T validate(Validation<T> aValidation);
     List<Error> getErrors();
 
     default boolean hasError(){
@@ -16,8 +16,8 @@ public interface ValidationHandler {
         return getErrors() != null && !getErrors().isEmpty() ? getErrors().get(0) : null;
     }
 
-    public interface Validation {
-        void validate();
+    public interface Validation<T> {
+        T validate();
     }
 
 
