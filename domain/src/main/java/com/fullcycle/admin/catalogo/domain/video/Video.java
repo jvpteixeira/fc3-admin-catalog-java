@@ -270,4 +270,44 @@ public class Video extends AggregateRoot<VideoID> {
 //            //                new HashSet<>(aVideo.getCastMembers()), TODO: CastMembers
 //        );
 //    }
+
+    public static Video with(
+            final VideoID videoID,
+            final String aTitle,
+            final String aDescription,
+            final Year aLaunchYear,
+            final double aDuration,
+            final boolean wasOpened,
+            final boolean wasPublished,
+            final Rating aRating,
+            final Instant aCreationDate,
+            final Instant aUpdatedDate,
+            final ImageMedia aBanner,
+            final ImageMedia aThumb,
+            final ImageMedia aThumbHalf,
+            final AudioVideoMedia aTrailer,
+            final AudioVideoMedia aVideo,
+            final Set<CategoryID> categories,
+            final Set<GenreID> genres
+    ){
+        return new Video(
+            videoID,
+            aTitle,
+            aDescription,
+            aLaunchYear,
+            aDuration,
+            wasOpened,
+            wasPublished,
+            aRating,
+            aCreationDate,
+            aUpdatedDate,
+            aBanner,
+            aThumb,
+            aThumbHalf,
+            aTrailer,
+            aVideo,
+            categories,
+            genres
+        );
+    }
 }

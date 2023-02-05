@@ -1,13 +1,13 @@
-package com.fullcycle.admin.catalogo.application.video.create;
+package com.fullcycle.admin.catalogo.application.video.update;
 
+import com.fullcycle.admin.catalogo.application.video.create.CreateVideoCommand;
 import com.fullcycle.admin.catalogo.domain.video.Resource;
 
 import java.util.Optional;
 import java.util.Set;
 
-public record CreateVideoCommand(
+public record UpdateVideoCommand(
         String id,
-
         String title,
         String description,
         Integer launchedAt,
@@ -25,8 +25,7 @@ public record CreateVideoCommand(
         Resource thumbnailHalf
 ) {
 
-    public static CreateVideoCommand with(
-            final String id,
+    public static UpdateVideoCommand with(
             final String title,
             final String description,
             final Integer launchedAt,
@@ -42,44 +41,43 @@ public record CreateVideoCommand(
             final Resource banner,
             final Resource thumbnail,
             final Resource thumbnailHalf
-    ){
-        return new CreateVideoCommand(
-            id,
-            title,
-            description,
-            launchedAt,
-            duration,
-            opened,
-            published,
-            rating,
-            categories,
-            genres,
-            members,
-            video,
-            trailer,
-            banner,
-            thumbnail,
-            thumbnailHalf
+    ) {
+        return new UpdateVideoCommand(
+                title,
+                description,
+                launchedAt,
+                duration,
+                opened,
+                published,
+                rating,
+                categories,
+                genres,
+                members,
+                video,
+                trailer,
+                banner,
+                thumbnail,
+                thumbnailHalf
         );
     }
 
-    public Optional<Resource> getVideo(){
+    public Optional<Resource> getVideo() {
         return Optional.ofNullable(video);
     }
 
-    public Optional<Resource> getTrailer(){
+    public Optional<Resource> getTrailer() {
         return Optional.ofNullable(trailer);
     }
 
-    public Optional<Resource> getBanner(){
+    public Optional<Resource> getBanner() {
         return Optional.ofNullable(banner);
     }
 
-    public Optional<Resource> getThumbnail(){
+    public Optional<Resource> getThumbnail() {
         return Optional.ofNullable(thumbnail);
     }
 
-    public Optional<Resource> getThumbnailHalf(){
+    public Optional<Resource> getThumbnailHalf() {
         return Optional.ofNullable(thumbnailHalf);
     }
 }

@@ -1,5 +1,6 @@
 package com.fullcycle.admin.catalogo.infrastructure.genre;
 
+import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.genre.Genre;
 import com.fullcycle.admin.catalogo.domain.genre.GenreGateway;
 import com.fullcycle.admin.catalogo.domain.genre.GenreID;
@@ -13,8 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import static org.springframework.data.jpa.domain.Specification.where;
 
@@ -74,6 +77,19 @@ public class GenreMySQLGateway implements GenreGateway {
                 pageResult.map(GenreJpaEntity::toAggregate).toList()
         );
     }
+
+    @Override
+    public void existsById(final Iterator<GenreID> genreIDS) {
+        final var ids = StreamSupport.stream(genreIDS.spliterator(), false)
+                .map(GenreID::getValue)
+                .toList();
+        
+        return this.genreRepository.existsById(ids).stream()
+                .map(CategoryID::from)
+                .toList();
+
+    }
+
 
     private Genre save(final Genre aGenre) {
         return this.genreRepository.save(GenreJpaEntity.from(aGenre))

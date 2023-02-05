@@ -43,7 +43,7 @@ public class AudioVideoMedia extends ValueObject {
         return name;
     }
 
-    public String location() {
+    public String rawLocation() {
         return rawLocation;
     }
 
@@ -54,6 +54,8 @@ public class AudioVideoMedia extends ValueObject {
     public MediaStatus status() {
         return status;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
