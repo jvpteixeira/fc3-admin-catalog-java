@@ -1,15 +1,40 @@
+amqp:
+  admin:
+    auto-create: false
+  queues:
+    video-created:
+      exchange: video.events
+      routing-key: video.created
+      queue: video.created.queue
+    video-encoded:
+      exchange: video.events
+      routing-key: video.encoded
+      queue: video.encoded.queue
+
+google:
+  cloud:
+    credentials: ${GOOGLE_CLOUD_CREDENTIALS}
+    project-id: ${GOOGLE_CLOUD_PROJECT}
+    storage:
+      catalog-videos:
+        bucket: codeflix_catalog_videos
+        connect-timeout: 250
+        read-timeout: 5000
+        retry-delay: 50
+        retry-max-delay: 50
+        retry-max-attempts: 2
+        retry-multiplier: 1.0
+
 server:
   port: 8080
-  servlet:
-    context-path: /api
   compression:
-    enabled: true # Whether response compression is enabled.
-    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json # Comma-separated list of MIME types that should be compressed.
-    min-response-size: 1024 # Minimum "Content-Length" value that is required for compression to be performed.
+    enabled: true
+    mime-type: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,aplication/json
+    min-response-size: 1024
   undertow:
     threads:
-      worker: 64 # Generally this should be reasonably high, at least 10 per CPU core: https://undertow.io/undertow-docs/undertow-docs-2.1.0/index.html#listeners-2
-      io: 4 # One IO thread per CPU core is a reasonable default: https://undertow.io/undertow-docs/undertow-docs-2.1.0/index.html#listeners-2
+      worker: 64
+      io: 4
 
 spring:
   datasource:
@@ -18,9 +43,9 @@ spring:
     password: ${mysql.password}
     hikari:
       auto-commit: false
-      connection-timeout: 250 # É uma configuração em milliseconds. O ideal é manter baixo para que estoure timeout logo e não prenda as threads.
-      max-lifetime: 600000 # Tempo máximo que uma conexão pode ficar aberta (10 min) - security.
-      maximum-pool-size: 20 # Mantemos até no máx 20 conexões com o banco de dados. O ideal é manter baixo mesmo, pois é algo custoso para o banco gerenciar. https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing
+      connection-timeout: 250
+      max-lifetime: 600000
+      maximum-pool-size: 20
       minimum-idle: 10
       pool-name: master
   jpa:
@@ -29,8 +54,21 @@ spring:
     hibernate:
       ddl-auto: none
     properties:
-      "[hibernate.dialect]": org.hibernate.dialect.MySQL5InnoDBDialect
-      "[hibernate.generate_statistics]": false
-      "[hibernate.connection.provider_disables_autocommit]": true
-      # Para aumentar a performance ao máximo, desabilitamos o auto-commit e o open-in-view.
-      # https://vladmihalcea.com/why-you-should-always-use-hibernate-connection-provider_disables_autocommit-for-resource-local-jpa-transactions/
+      "[hibernete.dialect]": org.hibernete.dialect.MySQL5InnoDBDialect
+      "[hibernete.generate_static]": false
+      "[hibernete.connection.provider_disables_autocommit]": true
+  rabbitmq:
+    dynamic: ${amqp.admin.auto-create}
+    host: ${amqp.host}
+    port: ${amqp.port}
+    username: ${amqp.username}
+    password: ${amqp.password}
+  servlet:
+    multipart:
+      max-file-size: 10GB
+      max-request-size: 100GB
+
+storage:
+  catalog-videos:
+    file-name-pattern: type-{type}
+    location-pattern: videoId-{videoId}
